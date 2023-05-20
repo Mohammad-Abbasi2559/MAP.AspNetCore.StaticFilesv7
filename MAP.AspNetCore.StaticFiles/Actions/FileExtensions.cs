@@ -15,6 +15,6 @@ public static class FileExtensions
         if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentNullException("fileName is Rquired");
         if (!fileName.Contains(".")) throw new ArgumentException("File dont have Extension");
 
-        return fileName.Split('.').AsQueryable().LastOrDefault();
+        return fileName.Split('.').LastOrDefault();
     }
 }

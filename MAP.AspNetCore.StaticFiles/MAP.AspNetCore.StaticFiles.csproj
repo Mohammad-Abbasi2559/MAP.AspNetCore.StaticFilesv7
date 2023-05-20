@@ -12,6 +12,8 @@
     <Copyright>All All rights reserved</Copyright>
     <PackageLicenseExpression> Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Mohammad-Abbasi2559/MAP.AspNetCore.StaticFilesv7</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

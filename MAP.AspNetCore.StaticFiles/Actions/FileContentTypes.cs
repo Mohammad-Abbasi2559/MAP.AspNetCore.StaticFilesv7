@@ -411,7 +411,7 @@ public static class FileContentTypes
     /// <returns>return ContentType</returns>
     public static string? GetContentType(string name)
     {
-        return FileCotnetType(name.Split(".").AsQueryable().LastOrDefault());
+        return FileCotnetType(name.Split(".").LastOrDefault());
     }
 
 
@@ -422,7 +422,7 @@ public static class FileContentTypes
     /// <returns>bool</returns>
     public static bool TryContentType(string fileName)
     {
-        if (FileCotnetType(fileName.Split(".").AsQueryable().LastOrDefault()) == null)
+        if (FileCotnetType(fileName.Split(".").LastOrDefault()) == null)
         { return false; }
         return true;
     }
@@ -435,7 +435,7 @@ public static class FileContentTypes
     /// <returns></returns>
     public static bool TryContentType(string fileName, out string? contentType)
     {
-        string? contentTypeString = FileCotnetType(fileName.Split(".").AsQueryable().LastOrDefault());
+        string? contentTypeString = FileCotnetType(fileName.Split(".").LastOrDefault());
         if (contentTypeString == null)
         {
             contentType = null;

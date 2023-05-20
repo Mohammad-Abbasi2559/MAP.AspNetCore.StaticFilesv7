@@ -25,7 +25,7 @@ public static class UrlOperations
     /// <returns></returns>
     public static string? FileNameWithExtensionFromUrl(string url)
     {
-        return url.Split("\\").AsQueryable().LastOrDefault();
+        return url.Split("\\").LastOrDefault();
     }
 
     /// <summary>
@@ -39,9 +39,11 @@ public static class UrlOperations
     public static bool CheckUrl(string url1, string url2)
     {
         if (string.IsNullOrWhiteSpace(url1) || string.IsNullOrWhiteSpace(url2)) throw new ArgumentNullException("url is empty");
-        if (!url1.Contains("\\") || !url2.Contains("\\")) throw new ArgumentException("url not correct");
+
         url1 = RemoveLastSlash(url1);
         url2 = RemoveLastSlash(url2);
+
+        if (!url1.Contains("\\") || !url2.Contains("\\")) throw new ArgumentException("url not correct");
         if (url1.Split("\\").Last().Contains("?") || url2.Split("\\").Last().Contains("?"))
         {
             url1 = url1.ToLower().Replace("/home/index", string.Empty).Replace("/index", string.Empty);

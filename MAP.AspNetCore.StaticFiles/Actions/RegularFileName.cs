@@ -25,7 +25,7 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithExtension(string name)
     {
-        return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + "." + toEnDigits(name.Split(".").AsQueryable().Last());
+        return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + "." + toEnDigits(name.Split(".").Last());
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithExtension(string name, string extention)
     {
-        return string.Join("", toEnDigits(name.Replace("_", "-").Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + "." + toEnDigits(extention.Split(".").AsQueryable().Last());
+        return string.Join("", toEnDigits(name.Replace("_", "-").Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + "." + toEnDigits(extention.Split(".").Last());
     }
 
     /// <summary>
