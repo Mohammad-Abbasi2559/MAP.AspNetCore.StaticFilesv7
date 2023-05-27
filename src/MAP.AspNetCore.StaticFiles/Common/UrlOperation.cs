@@ -54,7 +54,7 @@ public static class UrlOperation
         }
         else
         {
-            if (FileContentTypes.TryContentType(url1) || FileContentTypes.TryContentType(url2))
+            if (FileContentType.TryContentType(url1) || FileContentType.TryContentType(url2))
             {
                 url1 = url1.ToLower();
                 url2 = url2.ToLower();
@@ -101,7 +101,7 @@ public static class UrlOperation
         }
         else
         {
-            if (FileContentTypes.TryContentType(path1) || FileContentTypes.TryContentType(path2))
+            if (FileContentType.TryContentType(path1) || FileContentType.TryContentType(path2))
             {
                 path1 = path1.ToLower();
                 path2 = path2.ToLower();

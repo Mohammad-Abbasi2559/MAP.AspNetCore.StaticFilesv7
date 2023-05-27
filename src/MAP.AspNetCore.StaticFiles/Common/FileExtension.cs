@@ -1,7 +1,7 @@
 ﻿
 namespace MAP.AspNetCore.StaticFiles;
 
-public static class FileExtensions
+public static class FileExtension
 {
     /// <summary>
     /// This method get file extension from file name

@@ -1,14 +1,14 @@
 ﻿
 namespace MAP.AspNetCore.StaticFiles;
 
-public static class FileContentTypes
+public static class FileContentType
 {
     /// <summary>
     /// This method take file extention and get contentType
     /// </summary>
     /// <param name="Extension">File extension</param>
     /// <returns>ContentType</returns>
-    internal static string? FileCotnetType(string? Extension)
+    internal static string? FileContnetType(string? Extension)
     {
         if (Extension == null || Extension == "")
             throw new ArgumentNullException("extension");
@@ -411,7 +411,7 @@ public static class FileContentTypes
     /// <returns>return ContentType</returns>
     public static string? GetContentType(string name)
     {
-        return FileCotnetType(name.Split(".").LastOrDefault());
+        return FileContnetType(name.Split(".").LastOrDefault());
     }
 
 
@@ -422,7 +422,7 @@ public static class FileContentTypes
     /// <returns>bool</returns>
     public static bool TryContentType(string fileName)
     {
-        if (FileCotnetType(fileName.Split(".").LastOrDefault()) == null)
+        if (FileContnetType(fileName.Split(".").LastOrDefault()) == null)
         { return false; }
         return true;
     }
@@ -435,7 +435,7 @@ public static class FileContentTypes
     /// <returns></returns>
     public static bool TryContentType(string fileName, out string? contentType)
     {
-        string? contentTypeString = FileCotnetType(fileName.Split(".").LastOrDefault());
+        string? contentTypeString = FileContnetType(fileName.Split(".").LastOrDefault());
         if (contentTypeString == null)
         {
             contentType = null;

@@ -12,9 +12,9 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithOutExtension(string name)
     {
-        if (FileContentTypes.TryContentType(name))
-            return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50));
-        return string.Join("", toEnDigits(name.Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50));
+        if (FileContentType.TryContentType(name))
+            return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString();
+        return string.Join("", toEnDigits(name.Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString();
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithExtension(string name)
     {
-        return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + "." + toEnDigits(name.Split(".").Last());
+        return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + "." + toEnDigits(name.Split(".").Last());
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithExtension(string name, string extention)
     {
-        return string.Join("", toEnDigits(name.Replace("_", "-").Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + "." + toEnDigits(extention.Split(".").Last());
+        return string.Join("", toEnDigits(name.Replace("_", "-").Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + "." + toEnDigits(extention.Split(".").Last());
     }
 
     /// <summary>
@@ -66,11 +66,6 @@ public static class RegularFileName
     /// <returns></returns>
     public static string toEnDigits(string input)
     {
-        string[] persian = new string[10] { "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹" };
-
-        for (int j = 0; j < persian.Length; j++)
-            input = input.Replace(persian[j], j.ToString());
-
-        return input;
+        return input.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("۷", "7").Replace("۸", "8").Replace("۹", "9");
     }
 }
