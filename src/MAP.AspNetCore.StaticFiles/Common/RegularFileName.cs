@@ -12,18 +12,6 @@ public static class RegularFileName
     private static readonly Regex AdditionalSpace = new("\\s+");
 
     /// <summary>
-    /// SetIndicator splited name
-    /// </summary>
-    /// <param name="nameSplit">name has split</param>
-    /// <param name="extension">set extension for use another time</param>
-    /// <returns>return name has split without its extention</returns>
-    private static string[] SetIndicator(string[] nameSplit, out string extension)
-    {
-        extension = "." + nameSplit.Last();
-        return nameSplit.Take(nameSplit.Length - 1).ToArray();
-    }
-
-    /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
     /// This method set file name with out Extension 
     /// </summary>
