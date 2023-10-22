@@ -6,9 +6,9 @@ public class UrlOperationTest
     [Theory]
     [InlineData("/admin/home/index", "/Admin/home/")]
     [InlineData("/home/index", "/home/")]
-    public void CheckUrlTest(string path1, string path2)
+    public void CheckUrlWithOutParameterTest(string path1, string path2)
     {
-        Assert.True(UrlOperation.CheckUrl(path1, path2));
+        Assert.True(UrlOperation.CheckUrlWithOutParameter(path1, path2));
     }
 
     [Theory]

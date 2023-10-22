@@ -9,7 +9,7 @@ public static class UrlOperation
     /// </summary>
     /// <param name="url"></param>
     /// <returns></returns>
-    private static string RemoveLastSlash(string url) => url.EndsWith("/")? url.Remove(url.Length - 1, 1) : url;
+    private static string RemoveLastSlash(string url) => url.EndsWith("/") ? url.Remove(url.Length - 1, 1) : url;
 
     /// <summary>
     /// Get file name from Url
@@ -36,7 +36,7 @@ public static class UrlOperation
             string[] questionSplit = lastData.Split('?');
             for (int i = 1; i < questionSplit.Length; i++) removeParameter += "?" + questionSplit[i];
         }
-        return lastData.Replace(removeParameter, string.Empty);
+        return removeParameter.Length > 0 ? lastData.Replace(removeParameter, string.Empty) : url;
     }
 
     /// <summary>
@@ -47,42 +47,40 @@ public static class UrlOperation
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="ArgumentException"></exception>
-    public static bool CheckUrl(string url1, string url2)
+    public static bool CheckUrlWithOutParameter(string url1, string url2)
     {
-        if (string.IsNullOrWhiteSpace(url1) || string.IsNullOrWhiteSpace(url2)) throw new ArgumentNullException("url is empty");
-        if (!url1.Contains("/") || !url2.Contains("/")) throw new ArgumentException("url not correct");
+        if (string.IsNullOrWhiteSpace(url1) || string.IsNullOrWhiteSpace(url2)) throw new ArgumentNullException("url1 or url2", "{0} is empty");
+        if (!url1.Contains('/') || !url2.Contains('/')) throw new ArgumentException("url not correct");
 
-        url1 = RemoveLastSlash(url1);
-        url2 = RemoveLastSlash(url2);
+        string[] urlSplit1 = RemoveParameter(RemoveLastSlash(url1)).ToLower().Replace("https://", string.Empty).Replace("http://", string.Empty).Split("/");
+        string[] urlSplit2 = RemoveParameter(RemoveLastSlash(url2)).ToLower().Replace("https://", string.Empty).Replace("http://", string.Empty).Split("/");
 
-        if (url1.Split("/").Last().Contains("?") || url2.Split("/").Last().Contains("?"))
-        {
-            url1 = url1.ToLower().Replace("/home/index", string.Empty).Replace("/index", string.Empty).Replace("/home", string.Empty);
-            url2 = url2.ToLower().Replace("/home/index", string.Empty).Replace("/index", string.Empty).Replace("/home", string.Empty);
-            
-            if (url1 == url2)
-                return true;
-        }
+        if (FileContentType.TryContentType(urlSplit1.Last()) || FileContentType.TryContentType(urlSplit2.Last())) return url1 == url2;
         else
         {
-            if (FileContentType.TryContentType(url1) || FileContentType.TryContentType(url2))
-            {
-                url1 = url1.ToLower();
-                url2 = url2.ToLower();
+            List<string> checkUrl1 = new();
+            List<string> checkUrl2 = new();
 
-                if (url1 == url2)
-                    return true;
+            for (int i = 0; i < urlSplit1.Length; i++) if (!urlSplit1.Contains("home") && !urlSplit1.Contains("index")) checkUrl1.Add(urlSplit1[i]);
+            for (int i = 0; i < urlSplit2.Length; i++) if (!urlSplit2.Contains("home") && !urlSplit2.Contains("index")) checkUrl2.Add(urlSplit2[i]);
+
+            if (checkUrl1.Count == checkUrl2.Count)
+            {
+                for (int i = 0; i < checkUrl1.Count; i++) if (checkUrl1[i] != checkUrl2[i]) return false;
             }
             else
             {
-                url1 = url1.ToLower().Replace("/home/index", string.Empty).Replace("/index", string.Empty).Replace("/home", string.Empty);
-                url2 = url2.ToLower().Replace("/home/index", string.Empty).Replace("/index", string.Empty).Replace("/home", string.Empty);
+                if (checkUrl1.Count < checkUrl2.Count)
+                {
+                    for (int i = 0; i < checkUrl1.Count; i++) if (checkUrl1[i] != checkUrl2[i]) return false;
+                }
+                else if (checkUrl1.Count != checkUrl2.Count + 1) return false;
+                else for (int i = 0; i < checkUrl2.Count; i++) if (checkUrl1[i] != checkUrl2[i]) return false;
 
-                if (url1 == url2)
-                    return true;
             }
         }
-        return false;
+
+        return true;
     }
 
     /// <summary>
