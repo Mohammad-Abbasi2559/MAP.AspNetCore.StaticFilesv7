@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace MAP.AspNetCore.StaticFiles;
 
-public class RegularFileName
+public class RegularFileName : IDisposable
 {
     /// <summary>
     /// Set true if you want change Persian/Arabic digits to English digits
@@ -32,6 +32,11 @@ public class RegularFileName
         extension = "." + nameSplit.Last();
         return nameSplit.Take(nameSplit.Length - 1).ToArray();
     }
+
+    /// <summary>
+    /// For free usage memory faster
+    /// </summary>
+    public void Dispose() => GC.SuppressFinalize(this);
 
     /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
