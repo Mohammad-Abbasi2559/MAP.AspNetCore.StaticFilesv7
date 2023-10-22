@@ -48,7 +48,7 @@ public class RegularFileName
 
         string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
 
-        changeCharacter = SetEnDigits ? toEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
 
         string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
 
@@ -69,7 +69,7 @@ public class RegularFileName
 
         string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
 
-        changeCharacter = SetEnDigits ? toEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
 
         string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
 
@@ -90,7 +90,7 @@ public class RegularFileName
 
         string changeCharacter = string.Join("-", nameSplit).Replace("_", "-"); //? Change Some specifed character
 
-        changeCharacter = SetEnDigits ? toEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
 
         string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
 
@@ -120,8 +120,9 @@ public class RegularFileName
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public static string toEnDigits(string input)
+    public string ToEnDigits(string input)
     {
-        return input.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("۷", "7").Replace("۸", "8").Replace("۹", "9");
+        StringBuilder builder = new();
+        return builder.Append(input).Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("۷", "7").Replace("۸", "8").Replace("۹", "9").ToString();
     }
 }
