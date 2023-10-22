@@ -12,9 +12,7 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithOutExtension(string name)
     {
-        if (FileContentType.TryContentType(name))
-            return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString();
-        return string.Join("", toEnDigits(name.Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString();
+        return FileContentType.TryContentType(name) ? string.Join(string.Empty, toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Length - 1)).Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() : string.Join(string.Empty, toEnDigits(name.Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString();
     }
 
     /// <summary>
