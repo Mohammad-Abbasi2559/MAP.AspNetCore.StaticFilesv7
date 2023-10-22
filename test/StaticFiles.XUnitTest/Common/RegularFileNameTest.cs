@@ -8,6 +8,9 @@ public class RegularFileNameTest
 
     private static Regex RegexWithOutExtension(string fileName) => new(fileName[..fileName.LastIndexOf('.')] + @"\S+");
 
+    private static Regex RegexWithExtension(string fileName) => new(fileName[..fileName.LastIndexOf('.')] + @"\S+" + fileName[fileName.LastIndexOf('.')..]);
+
+
     [Theory]
     [InlineData("test.txt")]
     [InlineData("test.png")]
@@ -17,4 +20,9 @@ public class RegularFileNameTest
     [Theory]
     [InlineData(" sfdff  _ fsf. svvs.txt")]
     public void SetNameWithOutExtensionTest2(string fileName) => Assert.Matches(RegexWithOutExtension(AdditionalSpace.Replace(fileName, string.Empty)), RegularFileName.SetNameWithOutExtension(fileName, out string? ext));
+
+    [Theory]
+    [InlineData("test.txt")]
+    [InlineData(" sfdff  _ fsf. svvs.txt")]
+    public void SetNameWithExtensionTest(string fileName) => Assert.Matches(RegexWithExtension(AdditionalSpace.Replace(fileName, string.Empty)), RegularFileName.SetNameWithExtension(fileName));
 }
