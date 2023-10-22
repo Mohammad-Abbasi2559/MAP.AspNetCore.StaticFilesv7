@@ -83,7 +83,7 @@ public static class RegularFileName
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string RemoveGuidFromNameWithExtension(string name) => name[..(name.LastIndexOf('_') - 1)] + name[name.LastIndexOf('.')..];
+    public static string RemoveGuidFromNameWithExtension(string name) => name[..name.LastIndexOf('_')] + name[name.LastIndexOf('.')..];
 
     /// <summary>
     /// This method change Persian/Arabic number to English number
