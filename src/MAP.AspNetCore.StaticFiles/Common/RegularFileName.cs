@@ -32,9 +32,9 @@ public static class RegularFileName
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string SetNameWithExtension(string name, string extention)
+    public static string SetNameWithExtension(string name, string extension)
     {
-        return string.Join("", toEnDigits(name.Replace("_", "-").Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + "." + toEnDigits(extention.Split(".").Last());
+        return string.Join(string.Empty, toEnDigits(name.Replace("_", "-").Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + (extension.StartsWith(".") ? toEnDigits(extension) : "." + toEnDigits(extension));
     }
 
     /// <summary>
