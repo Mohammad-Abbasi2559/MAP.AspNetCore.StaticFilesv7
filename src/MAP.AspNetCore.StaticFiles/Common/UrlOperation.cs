@@ -11,6 +11,8 @@ public static class UrlOperation
     /// <returns></returns>
     private static string RemoveLastSlash(string url) => url.EndsWith("/") ? url.Remove(url.Length - 1, 1) : url;
 
+    private static string AddSlashAtFirst(string path) => path.StartsWith("/") ? path : "/" + path;
+
     /// <summary>
     /// Get file name from Url
     /// </summary>
