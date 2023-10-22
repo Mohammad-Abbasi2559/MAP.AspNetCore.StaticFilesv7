@@ -54,8 +54,8 @@ public static class UrlOperation
         if (string.IsNullOrWhiteSpace(url1) || string.IsNullOrWhiteSpace(url2)) throw new ArgumentNullException("url1 or url2", "{0} is empty");
         if (!url1.Contains('/') || !url2.Contains('/')) throw new ArgumentException("url not correct");
 
-        string[] urlSplit1 = RemoveParameter(RemoveLastSlash(url1)).ToLower().Replace("https://", string.Empty).Replace("http://", string.Empty).Split("/");
-        string[] urlSplit2 = RemoveParameter(RemoveLastSlash(url2)).ToLower().Replace("https://", string.Empty).Replace("http://", string.Empty).Split("/");
+        string[] urlSplit1 = RemoveParameter(RemoveLastSlash(url1)).ToLower().Replace("https://", string.Empty).Replace("http://", string.Empty).Replace("www.", string.Empty).Split("/");
+        string[] urlSplit2 = RemoveParameter(RemoveLastSlash(url2)).ToLower().Replace("https://", string.Empty).Replace("http://", string.Empty).Replace("www.", string.Empty).Split("/");
 
         if (FileContentType.TryContentType(urlSplit1.Last()) || FileContentType.TryContentType(urlSplit2.Last())) return url1 == url2;
         else
@@ -63,8 +63,8 @@ public static class UrlOperation
             List<string> checkUrl1 = new();
             List<string> checkUrl2 = new();
 
-            for (int i = 0; i < urlSplit1.Length; i++) if (!urlSplit1.Contains("home") && !urlSplit1.Contains("index")) checkUrl1.Add(urlSplit1[i]);
-            for (int i = 0; i < urlSplit2.Length; i++) if (!urlSplit2.Contains("home") && !urlSplit2.Contains("index")) checkUrl2.Add(urlSplit2[i]);
+            for (int i = 0; i < urlSplit1.Length; i++) if (urlSplit1[i] != "home" && urlSplit1[i] != "index" && !string.IsNullOrEmpty(urlSplit1[i])) checkUrl1.Add(urlSplit1[i]);
+            for (int i = 0; i < urlSplit2.Length; i++) if (urlSplit2[i] != "home" && urlSplit2[i] != "index" && !string.IsNullOrEmpty(urlSplit2[i])) checkUrl2.Add(urlSplit2[i]);
 
             if (checkUrl1.Count == checkUrl2.Count)
             {
@@ -72,13 +72,17 @@ public static class UrlOperation
             }
             else
             {
-                if (checkUrl1.Count < checkUrl2.Count)
+                if (checkUrl1.Count == checkUrl2.Count + 1 && checkUrl2.Count > 1)
                 {
-                    for (int i = 0; i < checkUrl1.Count; i++) if (checkUrl1[i] != checkUrl2[i]) return false;
+                    for(int i = 0; i < checkUrl2.Count; i++) if (checkUrl1[i] != checkUrl2[i]) return false;
                 }
-                else if (checkUrl1.Count != checkUrl2.Count + 1) return false;
-                else for (int i = 0; i < checkUrl2.Count; i++) if (checkUrl1[i] != checkUrl2[i]) return false;
-
+                else if (checkUrl1.Count == checkUrl2.Count + 1 && urlSplit1.Length > 2) return checkUrl1[1] == urlSplit1.LastOrDefault();
+                else if(checkUrl1.Count + 1 == checkUrl2.Count && checkUrl1.Count > 1)
+                {
+                    for(int i = 0; i < checkUrl1.Count; i++) if (checkUrl1[i] != checkUrl2[i]) return false;
+                }
+                else if (checkUrl2.Count == checkUrl1.Count + 1 && urlSplit2.Length > 2) return checkUrl2[1] == urlSplit2.LastOrDefault();
+                else return false;
             }
         }
 
