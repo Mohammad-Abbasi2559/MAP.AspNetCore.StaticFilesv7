@@ -3,23 +3,13 @@ using System.Text.RegularExpressions;
 
 namespace MAP.AspNetCore.StaticFiles;
 
-public class RegularFileName : IDisposable
+public static class RegularFileName
 {
-    /// <summary>
-    /// Set true if you want change Persian/Arabic digits to English digits
-    /// </summary>
-    public bool SetEnDigits = false;
-
-    public RegularFileName() { }
-
-    public RegularFileName(bool setEnDigits) => SetEnDigits = setEnDigits;
-
-
     /// <summary>
     /// Set Regex for find Space in string
     /// </summary>
     /// <returns></returns>
-    private readonly Regex AdditionalSpace = new("\\s+");
+    private static readonly Regex AdditionalSpace = new("\\s+");
 
     /// <summary>
     /// SetIndicator splited name
@@ -34,18 +24,13 @@ public class RegularFileName : IDisposable
     }
 
     /// <summary>
-    /// For free usage memory faster
-    /// </summary>
-    public void Dispose() => GC.SuppressFinalize(this);
-
-    /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
     /// This method replace  "_" and "." from name to "-"
     /// This method set file name with out Extension 
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public string SetNameWithOutExtension(string name)
+    public static string SetNameWithOutExtension(string name, bool SetEnDigits = false)
     {
         string[] nameSplit = name.Split(".");
 
@@ -66,7 +51,7 @@ public class RegularFileName : IDisposable
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public string SetNameWithExtension(string name)
+    public static string SetNameWithExtension(string name, bool SetEnDigits = false)
     {
         string[] nameSplit = name.Split(".");
 
@@ -87,7 +72,7 @@ public class RegularFileName : IDisposable
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public string SetNameWithExtension(string name, string extension)
+    public static string SetNameWithExtension(string name, string extension, bool SetEnDigits = false)
     {
         string[] nameSplit = name.Split(".");
 
@@ -107,7 +92,7 @@ public class RegularFileName : IDisposable
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public string RemoveGuidFromNameWithOutExtension(string name, out string extension)
+    public static string RemoveGuidFromNameWithOutExtension(string name, out string extension)
     {
         extension = name[name.LastIndexOf('.')..];
         return name[..name.LastIndexOf('_')];
@@ -118,14 +103,14 @@ public class RegularFileName : IDisposable
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public string RemoveGuidFromNameWithExtension(string name) => name[..(name.LastIndexOf('_') - 1)] + name[name.LastIndexOf('.')..];
+    public static string RemoveGuidFromNameWithExtension(string name) => name[..(name.LastIndexOf('_') - 1)] + name[name.LastIndexOf('.')..];
 
     /// <summary>
     /// This method change Persian/Arabic number to English number
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public string ToEnDigits(string input)
+    public static string ToEnDigits(string input)
     {
         StringBuilder builder = new();
         return builder.Append(input).Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("۷", "7").Replace("۸", "8").Replace("۹", "9").ToString();
