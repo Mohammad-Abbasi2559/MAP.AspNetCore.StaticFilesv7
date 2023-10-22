@@ -2,8 +2,15 @@
 
 namespace MAP.AspNetCore.StaticFiles;
 
-public static class RegularFileName
+public class RegularFileName
 {
+    public bool SetEnDigits = false;
+
+    public RegularFileName() { }
+
+    public RegularFileName(bool setEnDigits) => SetEnDigits = setEnDigits;
+
+
     private static readonly Regex AdditionalSpace = new("\\s+");
 
     /// <summary>
@@ -13,9 +20,19 @@ public static class RegularFileName
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string SetNameWithOutExtension(string name)
+    public string SetNameWithOutExtension(string name)
     {
-        return FileContentType.TryContentType(name) ? string.Join(string.Empty, toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Length - 1)).Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() : string.Join(string.Empty, toEnDigits(name.Replace(".", "-").Replace("_", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString();
+        string[] nameSplit = name.Split(".");
+
+        string[] indicator = FileContentType.TryContentType(name) ? nameSplit.Take(nameSplit.Length - 1).ToArray() : nameSplit; //? If filename is with extension remove extension 
+
+        string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
+
+        changeCharacter = SetEnDigits ? toEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+
+        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
+
+        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "-" + Guid.NewGuid().ToString() : removeWitheSpace + "-" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
     }
 
     /// <summary>
