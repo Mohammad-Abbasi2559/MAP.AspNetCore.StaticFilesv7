@@ -19,7 +19,7 @@ public class RegularFileName
     /// Set Regex for find Space in string
     /// </summary>
     /// <returns></returns>
-    private static readonly Regex AdditionalSpace = new("\\s+");
+    private readonly Regex AdditionalSpace = new("\\s+");
 
     /// <summary>
     /// SetIndicator splited name
@@ -102,9 +102,10 @@ public class RegularFileName
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string RemoveGuidFromNameWithOutExtension(string name)
+    public string RemoveGuidFromNameWithOutExtension(string name, out string extension)
     {
-        return toEnDigits(name.Replace("_" + name.Split("_")[1], string.Empty).Replace(" - ", "-").Replace(" ", "-"));
+        extension = name[name.LastIndexOf('.')..];
+        return name[..name.LastIndexOf('_')];
     }
 
     /// <summary>
@@ -112,10 +113,7 @@ public class RegularFileName
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string RemoveGuidFromNameWithExtension(string name)
-    {
-        return toEnDigits(name.Replace("_" + name.Split("_")[1], string.Empty).Replace(" - ", "-").Replace(" ", "-") + "." + name.Split(".")[1]);
-    }
+    public string RemoveGuidFromNameWithExtension(string name) => name[..(name.LastIndexOf('_') - 1)] + name[name.LastIndexOf('.')..];
 
     /// <summary>
     /// This method change Persian/Arabic number to English number
