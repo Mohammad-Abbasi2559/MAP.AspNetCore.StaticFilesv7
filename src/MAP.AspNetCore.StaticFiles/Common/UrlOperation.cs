@@ -23,6 +23,23 @@ public static class UrlOperation
     }
 
     /// <summary>
+    /// Remove url Parameter
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    private static string RemoveParameter(string url)
+    {
+        string lastData = url.Split("/").LastOrDefault()!;
+        string removeParameter = string.Empty;
+        if (lastData.Contains('?'))
+        {
+            string[] questionSplit = lastData.Split('?');
+            for (int i = 1; i < questionSplit.Length; i++) removeParameter += "?" + questionSplit[i];
+        }
+        return lastData.Replace(removeParameter, string.Empty);
+    }
+
+    /// <summary>
     /// Check Url in asp.net Core Actions and Files
     /// </summary>
     /// <param name="url1"></param>
