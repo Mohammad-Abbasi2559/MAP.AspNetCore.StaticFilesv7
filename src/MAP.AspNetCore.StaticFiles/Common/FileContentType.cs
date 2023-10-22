@@ -408,10 +408,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="name">File name</param>
     /// <returns>return ContentType</returns>
-    public static string? GetContentType(string name)
-    {
-        return FileContnetType(name.Split(".").LastOrDefault());
-    }
+    public static string? GetContentType(string name) => FileContnetType(name[name.LastIndexOf('.')..]);
 
 
     /// <summary>
