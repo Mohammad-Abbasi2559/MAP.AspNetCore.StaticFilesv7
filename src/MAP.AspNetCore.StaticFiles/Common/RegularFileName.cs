@@ -14,6 +14,10 @@ public class RegularFileName
     public RegularFileName(bool setEnDigits) => SetEnDigits = setEnDigits;
 
 
+    /// <summary>
+    /// Set Regex for find Space in string
+    /// </summary>
+    /// <returns></returns>
     private static readonly Regex AdditionalSpace = new("\\s+");
 
     /// <summary>
