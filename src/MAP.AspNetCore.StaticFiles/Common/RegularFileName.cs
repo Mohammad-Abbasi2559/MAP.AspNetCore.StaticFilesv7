@@ -19,7 +19,7 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithOutExtension(string name, out string? extension, bool SetEnDigits = false)
     {
-        string indicator = FileExtension.TryGetFileExtension(name, out string? exc) ? name[..(name.LastIndexOf('.') - 1)] : name; //? If filename is with extension remove extension 
+        string indicator = FileExtension.TryGetFileExtension(name, out string? exc) ? name[..name.LastIndexOf('.')] : name; //? If filename is with extension remove extension 
 
         indicator = SetEnDigits ? ToEnDigits(indicator) : indicator; //? Change Persian digits and Arabic digits to English digits
 
