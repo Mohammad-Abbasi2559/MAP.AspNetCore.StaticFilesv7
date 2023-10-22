@@ -25,24 +25,22 @@ public static class RegularFileName
 
     /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
-    /// This method replace  "_" and "." from name to "-"
     /// This method set file name with out Extension 
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string SetNameWithOutExtension(string name, bool SetEnDigits = false)
+    public static string SetNameWithOutExtension(string name, out string? extension, bool SetEnDigits = false)
     {
-        string[] nameSplit = name.Split(".");
+        string indicator = FileContentType.TryContentType(name) ? name[..(name.LastIndexOf('.') - 1)] : name; //? If filename is with extension remove extension 
 
-        string[] indicator = FileContentType.TryContentType(name) ? nameSplit.Take(nameSplit.Length - 1).ToArray() : nameSplit; //? If filename is with extension remove extension 
+        indicator = SetEnDigits ? ToEnDigits(indicator) : indicator; //? Change Persian digits and Arabic digits to English digits
 
-        string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
+        indicator = AdditionalSpace.Replace(indicator, string.Empty); //? Remove white space from string
 
-        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        _ = FileExtension.TryGetFileExtension(name, out string? exc);
+        extension = exc;
 
-        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
-
-        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() : removeWitheSpace + "_" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
+        return indicator.Length > 50 ? indicator[..50] + "_" + Guid.NewGuid().ToString() : indicator + "_" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
     }
 
     /// <summary>
