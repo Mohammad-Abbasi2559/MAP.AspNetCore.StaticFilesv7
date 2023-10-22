@@ -1,8 +1,11 @@
-﻿
+﻿using System.Text.RegularExpressions;
+
 namespace MAP.AspNetCore.StaticFiles;
 
 public static class RegularFileName
 {
+    private static readonly Regex AdditionalSpace = new("\\s+");
+
     /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
     /// This method replace  "_" and "." from name to "-"
