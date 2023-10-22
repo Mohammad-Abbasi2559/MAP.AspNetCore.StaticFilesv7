@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MAP.AspNetCore.StaticFiles;
 
@@ -19,6 +20,18 @@ public class RegularFileName
     /// </summary>
     /// <returns></returns>
     private static readonly Regex AdditionalSpace = new("\\s+");
+
+    /// <summary>
+    /// SetIndicator splited name
+    /// </summary>
+    /// <param name="nameSplit">name has split</param>
+    /// <param name="extension">set extension for use another time</param>
+    /// <returns>return name has split without its extention</returns>
+    private static string[] SetIndicator(string[] nameSplit, out string extension)
+    {
+        extension = nameSplit.Last();
+        return nameSplit.Take(nameSplit.Length - 1).ToArray();
+    }
 
     /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
@@ -48,9 +61,21 @@ public class RegularFileName
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string SetNameWithExtension(string name)
+    public string SetNameWithExtension(string name)
     {
-        return string.Join(string.Empty, toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Length - 1)).Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + "." + toEnDigits(name.Split(".").Last());
+        string[] nameSplit = name.Split(".");
+
+        string[] indicator = FileContentType.TryContentType(name) ? SetIndicator(nameSplit, out string extension) : throw new ArgumentOutOfRangeException(nameof(name)); //? If filename is with extension remove extension 
+
+        string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
+
+        changeCharacter = SetEnDigits ? toEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+
+        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
+
+        StringBuilder builder = new();
+
+        return removeWitheSpace.Length > 50 ? builder.Append(removeWitheSpace[..50]).Append('-').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString() : builder.Append(removeWitheSpace).Append('-').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString(); //? Set the length of uniqe name
     }
 
     /// <summary>
