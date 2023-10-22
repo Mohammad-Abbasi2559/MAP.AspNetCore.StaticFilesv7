@@ -52,7 +52,7 @@ public class RegularFileName
 
         string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
 
-        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "-" + Guid.NewGuid().ToString() : removeWitheSpace + "-" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
+        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() : removeWitheSpace + "_" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public class RegularFileName
 
         StringBuilder builder = new();
 
-        return removeWitheSpace.Length > 50 ? builder.Append(removeWitheSpace[..50]).Append('-').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString() : builder.Append(removeWitheSpace).Append('-').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString(); //? Set the length of uniqe name
+        return removeWitheSpace.Length > 50 ? builder.Append(removeWitheSpace[..50]).Append('_').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString() : builder.Append(removeWitheSpace).Append('_').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString(); //? Set the length of uniqe name
     }
 
     /// <summary>
