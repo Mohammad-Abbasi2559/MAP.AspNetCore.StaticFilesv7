@@ -15,7 +15,7 @@ public static class FileExtension
         if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentNullException(nameof(fileName));
         if (!fileName.Contains('.')) throw new ArgumentException("File dont have Extension");
 
-        return fileName[fileName.LastIndexOf('.')..];
+        return FileContentType.TryContentType(fileName) ? fileName[fileName.LastIndexOf('.')..] : throw new ArgumentException("{0} is not have extension", nameof(fileName));
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public static class FileExtension
         if (!fileName.Contains('.')) throw new ArgumentException("File dont have Extension");
 
         bool contentType = FileContentType.TryContentType(fileName);
-        
+
         extension = contentType ? fileName[fileName.LastIndexOf('.')..] : null;
 
         return contentType;
