@@ -14,24 +14,24 @@ public class UrlOperationTest
     [Theory]
     [InlineData("/admin/home/index", "/Admin/home/")]
     [InlineData("/home/index", "/home/")]
-    public void CheckPathTest1(string path1, string path2)
+    public void CheckPathWithOutParameterTest1(string path1, string path2)
     {
-        Assert.True(UrlOperation.CheckPath(path1, path2));
+        Assert.True(UrlOperation.CheckPathWithOutParameter(path1, path2));
     }
 
     [Theory]
     [InlineData("admin/home/Index/", "/home/index")]
-    [InlineData("admin", "/home/index")]
-    public void CheckPathTest2(string path1, string path2)
+    [InlineData("admin/", "/home/index")]
+    public void CheckPathWithOutParameterTest2(string path1, string path2)
     {
-        Assert.Throws<ArgumentException>(() => UrlOperation.CheckPath(path1, path2));
+        Assert.False(UrlOperation.CheckPathWithOutParameter(path1, path2));
     }
 
     [Theory]
     [InlineData("admin/home", "  ")]
-    public void CheckPathTest3(string path1, string path2)
+    public void CheckPathWithOutParameterTest3(string path1, string path2)
     {
-        Assert.Throws<ArgumentNullException>(() => UrlOperation.CheckPath(path1, path2));
+        Assert.Throws<ArgumentNullException>(() => UrlOperation.CheckPathWithOutParameter(path1, path2));
     }
 
 }
