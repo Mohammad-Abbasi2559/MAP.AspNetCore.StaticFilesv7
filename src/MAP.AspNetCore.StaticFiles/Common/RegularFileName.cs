@@ -75,7 +75,7 @@ public static class RegularFileName
     public static string RemoveGuidFromNameWithOutExtension(string name, out string extension)
     {
         extension = name[name.LastIndexOf('.')..];
-        return name[..name.LastIndexOf('_')];
+        return name[..(name.LastIndexOf('_') - 1)];
     }
 
     /// <summary>
