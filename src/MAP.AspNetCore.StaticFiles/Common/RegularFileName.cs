@@ -29,7 +29,7 @@ public class RegularFileName
     /// <returns>return name has split without its extention</returns>
     private static string[] SetIndicator(string[] nameSplit, out string extension)
     {
-        extension = nameSplit.Last();
+        extension = "." + nameSplit.Last();
         return nameSplit.Take(nameSplit.Length - 1).ToArray();
     }
 
@@ -73,9 +73,7 @@ public class RegularFileName
 
         string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
 
-        StringBuilder builder = new();
-
-        return removeWitheSpace.Length > 50 ? builder.Append(removeWitheSpace[..50]).Append('_').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString() : builder.Append(removeWitheSpace).Append('_').Append(Guid.NewGuid().ToString()).Append('.').Append(extension).ToString(); //? Set the length of uniqe name
+        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() + extension : removeWitheSpace + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
     }
 
     /// <summary>
@@ -84,9 +82,19 @@ public class RegularFileName
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string SetNameWithExtension(string name, string extension)
+    public string SetNameWithExtension(string name, string extension)
     {
-        return string.Join(string.Empty, toEnDigits(name.Replace("_", "-").Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + (extension.StartsWith(".") ? toEnDigits(extension) : "." + toEnDigits(extension));
+        string[] nameSplit = name.Split(".");
+
+        extension = extension.StartsWith('.') ? extension : "." + extension;
+
+        string changeCharacter = string.Join("-", nameSplit).Replace("_", "-"); //? Change Some specifed character
+
+        changeCharacter = SetEnDigits ? toEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+
+        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
+
+        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() + extension : removeWitheSpace + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
     }
 
     /// <summary>
