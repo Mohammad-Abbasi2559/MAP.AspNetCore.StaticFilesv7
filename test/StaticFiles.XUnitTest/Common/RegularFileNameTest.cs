@@ -25,4 +25,16 @@ public class RegularFileNameTest
     [InlineData("test.txt")]
     [InlineData(" sfdff  _ fsf. svvs.txt")]
     public void SetNameWithExtensionTest(string fileName) => Assert.Matches(RegexWithExtension(AdditionalSpace.Replace(fileName, string.Empty)), RegularFileName.SetNameWithExtension(fileName));
+
+    [Theory]
+    [InlineData("test.txt")]
+    [InlineData(" sfdff  _ fsf. svvs.txt")]
+    public void RemoveGuidFromNameWithOutExtensionTest(string fileName)
+    {
+        string indicator = RegularFileName.SetNameWithExtension(fileName);
+        string removeGuid = RegularFileName.RemoveGuidFromNameWithOutExtension(indicator, out string ext);
+
+        Assert.True(ext.Contains('.'));
+        Assert.Matches(RegexWithOutExtension(AdditionalSpace.Replace(fileName, string.Empty)), removeGuid);
+    }
 }
