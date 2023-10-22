@@ -12,37 +12,22 @@ public static class RegularFileName
     private static readonly Regex AdditionalSpace = new("\\s+");
 
     /// <summary>
-    /// SetIndicator splited name
-    /// </summary>
-    /// <param name="nameSplit">name has split</param>
-    /// <param name="extension">set extension for use another time</param>
-    /// <returns>return name has split without its extention</returns>
-    private static string[] SetIndicator(string[] nameSplit, out string extension)
-    {
-        extension = "." + nameSplit.Last();
-        return nameSplit.Take(nameSplit.Length - 1).ToArray();
-    }
-
-    /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
-    /// This method replace  "_" and "." from name to "-"
     /// This method set file name with out Extension 
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string SetNameWithOutExtension(string name, bool SetEnDigits = false)
+    public static string SetNameWithOutExtension(string name, out string? extension, bool SetEnDigits = false)
     {
-        string[] nameSplit = name.Split(".");
+        string indicator = FileExtension.TryGetFileExtension(name, out string? exc) ? name[..(name.LastIndexOf('.') - 1)] : name; //? If filename is with extension remove extension 
 
-        string[] indicator = FileContentType.TryContentType(name) ? nameSplit.Take(nameSplit.Length - 1).ToArray() : nameSplit; //? If filename is with extension remove extension 
+        indicator = SetEnDigits ? ToEnDigits(indicator) : indicator; //? Change Persian digits and Arabic digits to English digits
 
-        string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
+        indicator = AdditionalSpace.Replace(indicator, string.Empty); //? Remove white space from string
 
-        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        extension = exc;
 
-        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
-
-        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() : removeWitheSpace + "_" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
+        return indicator.Length > 50 ? indicator[..50] + "_" + Guid.NewGuid().ToString() : indicator + "_" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
     }
 
     /// <summary>
@@ -53,38 +38,33 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithExtension(string name, bool SetEnDigits = false)
     {
-        string[] nameSplit = name.Split(".");
+        string extension = name[name.LastIndexOf('.')..];
 
-        string[] indicator = FileContentType.TryContentType(name) ? SetIndicator(nameSplit, out string extension) : throw new ArgumentOutOfRangeException(nameof(name)); //? If filename is with extension remove extension 
+        string indicator = FileContentType.TryContentType(name) ? name : throw new ArgumentOutOfRangeException(nameof(name)); //? If filename is with extension remove extension 
 
-        string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
+        indicator = SetEnDigits ? ToEnDigits(indicator) : indicator; //? Change Persian digits and Arabic digits to English digits
 
-        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        indicator = AdditionalSpace.Replace(indicator, string.Empty); //? Remove white space from string
 
-        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
-
-        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() + extension : removeWitheSpace + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
+        return indicator.Length > 50 ? indicator[..50] + "_" + Guid.NewGuid().ToString() + extension : indicator + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
     }
 
     /// <summary>
     /// This method creates a unique name for your file and short your file name to dont exception url
-    /// This method replace  "_" and "." from name to "-"
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
     public static string SetNameWithExtension(string name, string extension, bool SetEnDigits = false)
     {
-        string[] nameSplit = name.Split(".");
-
         extension = extension.StartsWith('.') ? extension : "." + extension;
 
-        string changeCharacter = string.Join("-", nameSplit).Replace("_", "-"); //? Change Some specifed character
+        string indicator = FileContentType.TryContentType(name + extension) ? name : throw new ArgumentException("{0} is not true" + nameof(extension)); //? Change Some specifed character
 
-        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        indicator = SetEnDigits ? ToEnDigits(indicator) : indicator; //? Change Persian digits and Arabic digits to English digits
 
-        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
+        indicator = AdditionalSpace.Replace(indicator, string.Empty); //? Remove white space from string
 
-        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() + extension : removeWitheSpace + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
+        return indicator.Length > 50 ? indicator[..50] + "_" + Guid.NewGuid().ToString() + extension : indicator + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
     }
 
     /// <summary>
@@ -95,7 +75,7 @@ public static class RegularFileName
     public static string RemoveGuidFromNameWithOutExtension(string name, out string extension)
     {
         extension = name[name.LastIndexOf('.')..];
-        return name[..name.LastIndexOf('_')];
+        return name[..(name.LastIndexOf('_') - 1)];
     }
 
     /// <summary>
