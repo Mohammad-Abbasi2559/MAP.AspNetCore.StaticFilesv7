@@ -18,7 +18,8 @@ public static class UrlOperation
     /// <returns></returns>
     public static string? FileNameWithExtensionFromUrl(string url)
     {
-        return url.Split("/").LastOrDefault();
+        string lastData = url.Split("/").LastOrDefault()!;
+        return FileContentType.TryContentType(lastData) ? lastData.Contains('?') ? lastData.Split('?')[1] : lastData : null;
     }
 
     /// <summary>
