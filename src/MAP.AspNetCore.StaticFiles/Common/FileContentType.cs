@@ -416,12 +416,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="fileName">FileName</param>
     /// <returns>bool</returns>
-    public static bool TryContentType(string fileName)
-    {
-        if (FileContnetType(fileName.Split(".").LastOrDefault()) == null)
-        { return false; }
-        return true;
-    }
+    public static bool TryContentType(string fileName) => FileContnetType(fileName[fileName.LastIndexOf('.')..]) != null;
 
     /// <summary>
     /// Check ContentType Exist or Not, and set contentType
@@ -431,14 +426,8 @@ public static class FileContentType
     /// <returns></returns>
     public static bool TryContentType(string fileName, out string? contentType)
     {
-        string? contentTypeString = FileContnetType(fileName.Split(".").LastOrDefault());
-        if (contentTypeString == null)
-        {
-            contentType = null;
-            return false;
-        }
-        contentType = contentTypeString;
-        return true;
+        contentType = FileContnetType(fileName[fileName.LastIndexOf('.')..]);
+        return contentType != null;
     }
 }
 
