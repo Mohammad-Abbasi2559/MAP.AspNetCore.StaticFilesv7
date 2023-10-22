@@ -4,6 +4,9 @@ namespace MAP.AspNetCore.StaticFiles;
 
 public class RegularFileName
 {
+    /// <summary>
+    /// Set true if you want change Persian/Arabic digits to English digits
+    /// </summary>
     public bool SetEnDigits = false;
 
     public RegularFileName() { }
