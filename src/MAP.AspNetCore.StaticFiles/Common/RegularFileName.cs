@@ -23,7 +23,7 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithExtension(string name)
     {
-        return string.Join("", toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Count() - 1)).Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + "." + toEnDigits(name.Split(".").Last());
+        return string.Join(string.Empty, toEnDigits(string.Join(".", name.Split(".").Take(name.Split(".").Length - 1)).Replace(".", "-").Replace(" - ", "-").Replace(" ", "-")).ToCharArray().Take(50)) + Guid.NewGuid().ToString() + "." + toEnDigits(name.Split(".").Last());
     }
 
     /// <summary>
