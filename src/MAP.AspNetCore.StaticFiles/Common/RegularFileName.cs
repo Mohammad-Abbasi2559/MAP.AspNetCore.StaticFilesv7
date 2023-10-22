@@ -31,13 +31,12 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithOutExtension(string name, out string? extension, bool SetEnDigits = false)
     {
-        string indicator = FileContentType.TryContentType(name) ? name[..(name.LastIndexOf('.') - 1)] : name; //? If filename is with extension remove extension 
+        string indicator = FileExtension.TryGetFileExtension(name, out string? exc) ? name[..(name.LastIndexOf('.') - 1)] : name; //? If filename is with extension remove extension 
 
         indicator = SetEnDigits ? ToEnDigits(indicator) : indicator; //? Change Persian digits and Arabic digits to English digits
 
         indicator = AdditionalSpace.Replace(indicator, string.Empty); //? Remove white space from string
 
-        _ = FileExtension.TryGetFileExtension(name, out string? exc);
         extension = exc;
 
         return indicator.Length > 50 ? indicator[..50] + "_" + Guid.NewGuid().ToString() : indicator + "_" + Guid.NewGuid().ToString(); //? Set the length of uniqe name
