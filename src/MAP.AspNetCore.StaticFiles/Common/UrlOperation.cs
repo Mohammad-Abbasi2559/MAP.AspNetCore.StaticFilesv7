@@ -9,14 +9,7 @@ public static class UrlOperation
     /// </summary>
     /// <param name="url"></param>
     /// <returns></returns>
-    /// <exception cref="ArgumentNullException">url is null</exception>
-    private static string RemoveLastSlash(string url)
-    {
-        if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url is null");
-        if (url.EndsWith("/"))
-            url = url.Remove(url.Length - 1, 1);
-        return url;
-    }
+    private static string RemoveLastSlash(string url) => url.EndsWith("/")? url.Remove(url.Length - 1, 1) : url;
 
     /// <summary>
     /// Get file name from Url
