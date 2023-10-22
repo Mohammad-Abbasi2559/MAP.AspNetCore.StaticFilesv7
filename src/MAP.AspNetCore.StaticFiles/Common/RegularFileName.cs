@@ -51,17 +51,15 @@ public static class RegularFileName
     /// <returns></returns>
     public static string SetNameWithExtension(string name, bool SetEnDigits = false)
     {
-        string[] nameSplit = name.Split(".");
+        string extension = name[name.LastIndexOf('.')..];
 
-        string[] indicator = FileContentType.TryContentType(name) ? SetIndicator(nameSplit, out string extension) : throw new ArgumentOutOfRangeException(nameof(name)); //? If filename is with extension remove extension 
+        string indicator = FileContentType.TryContentType(name) ? name : throw new ArgumentOutOfRangeException(nameof(name)); //? If filename is with extension remove extension 
 
-        string changeCharacter = string.Join("-", indicator).Replace("_", "-"); //? Change Some specifed character
+        indicator = SetEnDigits ? ToEnDigits(indicator) : indicator; //? Change Persian digits and Arabic digits to English digits
 
-        changeCharacter = SetEnDigits ? ToEnDigits(changeCharacter) : changeCharacter; //? Change Persian digits and Arabic digits to English digits
+        indicator = AdditionalSpace.Replace(indicator, string.Empty); //? Remove white space from string
 
-        string removeWitheSpace = AdditionalSpace.Replace(changeCharacter, string.Empty); //? Remove white space from string
-
-        return removeWitheSpace.Length > 50 ? removeWitheSpace[..50] + "_" + Guid.NewGuid().ToString() + extension : removeWitheSpace + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
+        return indicator.Length > 50 ? indicator[..50] + "_" + Guid.NewGuid().ToString() + extension : indicator + "_" + Guid.NewGuid().ToString() + extension; //? Set the length of uniqe name
     }
 
     /// <summary>
