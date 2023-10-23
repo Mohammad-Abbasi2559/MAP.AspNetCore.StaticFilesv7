@@ -12,7 +12,7 @@
     <title>Work with static files and check url and path in dotnet</title>
     <Description>
       This package check Mime type of files and file extesion. 
-      Create uniqe name for file.
+      Create unique name for file.
       Check path and url.
     </Description>
     <readme>../../README.md</readme>
