@@ -37,6 +37,7 @@ public class UrlOperationTest
     [Theory]
     [InlineData("admin/home/Index/", "/home/index")]
     [InlineData("admin/", "/home/index")]
+    [InlineData("/admin/home/create", "/admin/home/")]
     public void CheckPathWithOutParameterTest2(string path1, string path2)
     {
         Assert.False(UrlOperation.CheckPathWithOutParameter(path1, path2));
