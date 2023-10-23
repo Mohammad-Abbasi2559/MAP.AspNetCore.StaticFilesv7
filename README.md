@@ -1,6 +1,6 @@
 # With this package you can work with static file name
 
-* Create uniqe name for file
+* Create unique name for file
 * Take file ContentType
 * Compare two url for asp.net core
 * ...
@@ -12,4 +12,4 @@
 * Clean and safe Svg
 * ...
 
-### More details and see how use it come to : [Github](https://github.com/Mohammad-Abbasi2559/MAP.AspNetCore.StaticFiles/wiki)
+### More details and see how use it come to : [Github](https://github.com/Mohammad-Abbasi2559/MAP.AspNetCore.StaticFilesv7/wiki)
