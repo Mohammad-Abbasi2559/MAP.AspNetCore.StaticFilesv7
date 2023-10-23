@@ -111,8 +111,8 @@ public static class UrlOperation
             List<string> checkPath1 = new();
             List<string> checkPath2 = new();
 
-            for (int i = 0; i < pathSplit1.Length; i++) if (!(pathSplit1[i] == "home") && !(pathSplit1[i] == "index") && !string.IsNullOrEmpty(pathSplit1[i])) checkPath1.Add(pathSplit1[i]);
-            for (int i = 0; i < pathSplit2.Length; i++) if (!(pathSplit2[i] == "home") && !(pathSplit2[i] == "index") && !string.IsNullOrEmpty(pathSplit2[i])) checkPath2.Add(pathSplit2[i]);
+            for (int i = 0; i < pathSplit1.Length; i++) if ((pathSplit1[i] != "home" || i + 1 < pathSplit1.Length && pathSplit1[ i + 1] != "index" && !string.IsNullOrEmpty(pathSplit1[i + 1])) && pathSplit1[i] != "index" && !string.IsNullOrEmpty(pathSplit1[i])) checkPath1.Add(pathSplit1[i]);
+            for (int i = 0; i < pathSplit2.Length; i++) if ((pathSplit2[i] != "home" || i + 1 < pathSplit2.Length && pathSplit2[ i + 1] != "index" && !string.IsNullOrEmpty(pathSplit2[i + 1])) && pathSplit2[i] != "index" && !string.IsNullOrEmpty(pathSplit2[i])) checkPath2.Add(pathSplit2[i]);
 
             if (checkPath1.Count == checkPath2.Count)
             {
