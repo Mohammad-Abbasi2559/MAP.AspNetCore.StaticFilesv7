@@ -10,397 +10,396 @@ public static class FileContentType
     /// <returns>ContentType</returns>
     internal static string? FileContnetType(string? Extension)
     {
-        if (Extension == null || Extension == "")
-            throw new ArgumentNullException("extension");
+        if (string.IsNullOrWhiteSpace(Extension)) throw new ArgumentNullException(nameof(Extension));
 
-        if (!Extension.StartsWith("."))
-            Extension = "." + Extension;
+        Extension = Extension.StartsWith(".") ? Extension : "." + Extension;
 
         //List of file extensions and contentType
         #region return ContentType
-        switch (Extension)
+        return Extension switch
         {
-            case ".323": return "text/h323";
-            case ".3g2": return "video/3gpp2";
-            case ".3gp2": return "video/3gpp2";
-            case ".3gp": return "video/3gpp";
-            case ".3gpp": return "video/3gpp";
-            case ".aac": return "audio/aac";
-            case ".aaf": return "application/octet-stream";
-            case ".aca": return "application/octet-stream";
-            case ".accdb": return "application/msaccess";
-            case ".accde": return "application/msaccess";
-            case ".accdt": return "application/msaccess";
-            case ".acx": return "application/internet-property-stream";
-            case ".adt": return "audio/vnd.dlna.adts";
-            case ".adts": return "audio/vnd.dlna.adts";
-            case ".afm": return "application/octet-stream";
-            case ".ai": return "application/postscript";
-            case ".aif": return "audio/x-aiff";
-            case ".aifc": return "audio/aiff";
-            case ".aiff": return "audio/aiff";
-            case ".appcache": return "text/cache-manifest";
-            case ".application": return "application/x-ms-application";
-            case ".art": return "image/x-jg";
-            case ".asd": return "application/octet-stream";
-            case ".asf": return "video/x-ms-asf";
-            case ".asi": return "application/octet-stream";
-            case ".asm": return "text/plain";
-            case ".asr": return "video/x-ms-asf";
-            case ".asx": return "video/x-ms-asf";
-            case ".atom": return "application/atom+xml";
-            case ".au": return "audio/basic";
-            case ".avi": return "video/x-msvideo";
-            case ".axs": return "application/olescript";
-            case ".bas": return "text/plain";
-            case ".bcpio": return "application/x-bcpio";
-            case ".bin": return "application/octet-stream";
-            case ".bmp": return "image/bmp";
-            case ".c": return "text/plain";
-            case ".cab": return "application/vnd.ms-cab-compressed";
-            case ".calx": return "application/vnd.ms-office.calx";
-            case ".cat": return "application/vnd.ms-pki.seccat";
-            case ".cdf": return "application/x-cdf";
-            case ".chm": return "application/octet-stream";
-            case ".class": return "application/x-java-applet";
-            case ".clp": return "application/x-msclip";
-            case ".cmx": return "image/x-cmx";
-            case ".cnf": return "text/plain";
-            case ".cod": return "image/cis-cod";
-            case ".cpio": return "application/x-cpio";
-            case ".cpp": return "text/plain";
-            case ".crd": return "application/x-mscardfile";
-            case ".crl": return "application/pkix-crl";
-            case ".crt": return "application/x-x509-ca-cert";
-            case ".csh": return "application/x-csh";
-            case ".css": return "text/css";
-            case ".csv": return "application/octet-stream";
-            case ".cur": return "application/octet-stream";
-            case ".dcr": return "application/x-director";
-            case ".deploy": return "application/octet-stream";
-            case ".der": return "application/x-x509-ca-cert";
-            case ".dib": return "image/bmp";
-            case ".dir": return "application/x-director";
-            case ".disco": return "text/xml";
-            case ".dlm": return "text/dlm";
-            case ".doc": return "application/msword";
-            case ".docm": return "application/vnd.ms-word.document.macroEnabled.12";
-            case ".docx": return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-            case ".dot": return "application/msword";
-            case ".dotm": return "application/vnd.ms-word.template.macroEnabled.12";
-            case ".dotx": return "application/vnd.openxmlformats-officedocument.wordprocessingml.template";
-            case ".dsp": return "application/octet-stream";
-            case ".dtd": return "text/xml";
-            case ".dvi": return "application/x-dvi";
-            case ".dvr-ms": return "video/x-ms-dvr";
-            case ".dwf": return "drawing/x-dwf";
-            case ".dwp": return "application/octet-stream";
-            case ".dxr": return "application/x-director";
-            case ".eml": return "message/rfc822";
-            case ".emz": return "application/octet-stream";
-            case ".eot": return "application/vnd.ms-fontobject";
-            case ".eps": return "application/postscript";
-            case ".etx": return "text/x-setext";
-            case ".evy": return "application/envoy";
-            case ".fdf": return "application/vnd.fdf";
-            case ".fif": return "application/fractals";
-            case ".fla": return "application/octet-stream";
-            case ".flr": return "x-world/x-vrml";
-            case ".flv": return "video/x-flv";
-            case ".gif": return "image/gif";
-            case ".gtar": return "application/x-gtar";
-            case ".gz": return "application/x-gzip";
-            case ".h": return "text/plain";
-            case ".hdf": return "application/x-hdf";
-            case ".hdml": return "text/x-hdml";
-            case ".hhc": return "application/x-oleobject";
-            case ".hhk": return "application/octet-stream";
-            case ".hhp": return "application/octet-stream";
-            case ".hlp": return "application/winhlp";
-            case ".hqx": return "application/mac-binhex40";
-            case ".hta": return "application/hta";
-            case ".htc": return "text/x-component";
-            case ".htm": return "text/html";
-            case ".html": return "text/html";
-            case ".htt": return "text/webviewhtml";
-            case ".hxt": return "text/html";
-            case ".ical": return "text/calendar";
-            case ".icalendar": return "text/calendar";
-            case ".ico": return "image/x-icon";
-            case ".ics": return "text/calendar";
-            case ".ief": return "image/ief";
-            case ".ifb": return "text/calendar";
-            case ".iii": return "application/x-iphone";
-            case ".inf": return "application/octet-stream";
-            case ".ins": return "application/x-internet-signup";
-            case ".isp": return "application/x-internet-signup";
-            case ".IVF": return "video/x-ivf";
-            case ".jar": return "application/java-archive";
-            case ".java": return "application/octet-stream";
-            case ".jck": return "application/liquidmotion";
-            case ".jcz": return "application/liquidmotion";
-            case ".jfif": return "image/pjpeg";
-            case ".jpb": return "application/octet-stream";
-            case ".jpe": return "image/jpeg";
-            case ".jpeg": return "image/jpeg";
-            case ".jpg": return "image/jpeg";
-            case ".js": return "application/javascript";
-            case ".json": return "application/json";
-            case ".jsx": return "text/jscript";
-            case ".latex": return "application/x-latex";
-            case ".lit": return "application/x-ms-reader";
-            case ".lpk": return "application/octet-stream";
-            case ".lsf": return "video/x-la-asf";
-            case ".lsx": return "video/x-la-asf";
-            case ".lzh": return "application/octet-stream";
-            case ".m13": return "application/x-msmediaview";
-            case ".m14": return "application/x-msmediaview";
-            case ".m1v": return "video/mpeg";
-            case ".m2ts": return "video/vnd.dlna.mpeg-tts";
-            case ".m3u": return "audio/x-mpegurl";
-            case ".m4a": return "audio/mp4";
-            case ".m4v": return "video/mp4";
-            case ".man": return "application/x-troff-man";
-            case ".manifest": return "application/x-ms-manifest";
-            case ".map": return "text/plain";
-            case ".markdown": return "text/markdown";
-            case ".md": return "text/markdown";
-            case ".mdb": return "application/x-msaccess";
-            case ".mdp": return "application/octet-stream";
-            case ".me": return "application/x-troff-me";
-            case ".mht": return "message/rfc822";
-            case ".mhtml": return "message/rfc822";
-            case ".mid": return "audio/mid";
-            case ".midi": return "audio/mid";
-            case ".mix": return "application/octet-stream";
-            case ".mmf": return "application/x-smaf";
-            case ".mno": return "text/xml";
-            case ".mny": return "application/x-msmoney";
-            case ".mov": return "video/quicktime";
-            case ".movie": return "video/x-sgi-movie";
-            case ".mp2": return "video/mpeg";
-            case ".mp3": return "audio/mpeg";
-            case ".mp4": return "video/mp4";
-            case ".mp4v": return "video/mp4";
-            case ".mpa": return "video/mpeg";
-            case ".mpe": return "video/mpeg";
-            case ".mpeg": return "video/mpeg";
-            case ".mpg": return "video/mpeg";
-            case ".mpp": return "application/vnd.ms-project";
-            case ".mpv2": return "video/mpeg";
-            case ".ms": return "application/x-troff-ms";
-            case ".msi": return "application/octet-stream";
-            case ".mso": return "application/octet-stream";
-            case ".mvb": return "application/x-msmediaview";
-            case ".mvc": return "application/x-miva-compiled";
-            case ".nc": return "application/x-netcdf";
-            case ".nsc": return "video/x-ms-asf";
-            case ".nws": return "message/rfc822";
-            case ".ocx": return "application/octet-stream";
-            case ".oda": return "application/oda";
-            case ".odc": return "text/x-ms-odc";
-            case ".ods": return "application/oleobject";
-            case ".oga": return "audio/ogg";
-            case ".ogg": return "video/ogg";
-            case ".ogv": return "video/ogg";
-            case ".ogx": return "application/ogg";
-            case ".one": return "application/onenote";
-            case ".onea": return "application/onenote";
-            case ".onetoc": return "application/onenote";
-            case ".onetoc2": return "application/onenote";
-            case ".onetmp": return "application/onenote";
-            case ".onepkg": return "application/onenote";
-            case ".osdx": return "application/opensearchdescription+xml";
-            case ".otf": return "font/otf";
-            case ".p10": return "application/pkcs10";
-            case ".p12": return "application/x-pkcs12";
-            case ".p7b": return "application/x-pkcs7-certificates";
-            case ".p7c": return "application/pkcs7-mime";
-            case ".p7m": return "application/pkcs7-mime";
-            case ".p7r": return "application/x-pkcs7-certreqresp";
-            case ".p7s": return "application/pkcs7-signature";
-            case ".pbm": return "image/x-portable-bitmap";
-            case ".pcx": return "application/octet-stream";
-            case ".pcz": return "application/octet-stream";
-            case ".pdf": return "application/pdf";
-            case ".pfb": return "application/octet-stream";
-            case ".pfm": return "application/octet-stream";
-            case ".pfx": return "application/x-pkcs12";
-            case ".pgm": return "image/x-portable-graymap";
-            case ".pko": return "application/vnd.ms-pki.pko";
-            case ".pma": return "application/x-perfmon";
-            case ".pmc": return "application/x-perfmon";
-            case ".pml": return "application/x-perfmon";
-            case ".pmr": return "application/x-perfmon";
-            case ".pmw": return "application/x-perfmon";
-            case ".png": return "image/png";
-            case ".pnm": return "image/x-portable-anymap";
-            case ".pnz": return "image/png";
-            case ".pot": return "application/vnd.ms-powerpoint";
-            case ".potm": return "application/vnd.ms-powerpoint.template.macroEnabled.12";
-            case ".potx": return "application/vnd.openxmlformats-officedocument.presentationml.template";
-            case ".ppam": return "application/vnd.ms-powerpoint.addin.macroEnabled.12";
-            case ".ppm": return "image/x-portable-pixmap";
-            case ".pps": return "application/vnd.ms-powerpoint";
-            case ".ppsm": return "application/vnd.ms-powerpoint.slideshow.macroEnabled.12";
-            case ".ppsx": return "application/vnd.openxmlformats-officedocument.presentationml.slideshow";
-            case ".ppt": return "application/vnd.ms-powerpoint";
-            case ".pptm": return "application/vnd.ms-powerpoint.presentation.macroEnabled.12";
-            case ".pptx": return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
-            case ".prf": return "application/pics-rules";
-            case ".prm": return "application/octet-stream";
-            case ".prx": return "application/octet-stream";
-            case ".ps": return "application/postscript";
-            case ".psd": return "application/octet-stream";
-            case ".psm": return "application/octet-stream";
-            case ".psp": return "application/octet-stream";
-            case ".pub": return "application/x-mspublisher";
-            case ".qt": return "video/quicktime";
-            case ".qtl": return "application/x-quicktimeplayer";
-            case ".qxd": return "application/octet-stream";
-            case ".ra": return "audio/x-pn-realaudio";
-            case ".ram": return "audio/x-pn-realaudio";
-            case ".rar": return "application/octet-stream";
-            case ".ras": return "image/x-cmu-raster";
-            case ".rf": return "image/vnd.rn-realflash";
-            case ".rgb": return "image/x-rgb";
-            case ".rm": return "application/vnd.rn-realmedia";
-            case ".rmi": return "audio/mid";
-            case ".roff": return "application/x-troff";
-            case ".rpm": return "audio/x-pn-realaudio-plugin";
-            case ".rtf": return "application/rtf";
-            case ".rtx": return "text/richtext";
-            case ".scd": return "application/x-msschedule";
-            case ".sct": return "text/scriptlet";
-            case ".sea": return "application/octet-stream";
-            case ".setpay": return "application/set-payment-initiation";
-            case ".setreg": return "application/set-registration-initiation";
-            case ".sgml": return "text/sgml";
-            case ".sh": return "application/x-sh";
-            case ".shar": return "application/x-shar";
-            case ".sit": return "application/x-stuffit";
-            case ".sldm": return "application/vnd.ms-powerpoint.slide.macroEnabled.12";
-            case ".sldx": return "application/vnd.openxmlformats-officedocument.presentationml.slide";
-            case ".smd": return "audio/x-smd";
-            case ".smi": return "application/octet-stream";
-            case ".smx": return "audio/x-smd";
-            case ".smz": return "audio/x-smd";
-            case ".snd": return "audio/basic";
-            case ".snp": return "application/octet-stream";
-            case ".spc": return "application/x-pkcs7-certificates";
-            case ".spl": return "application/futuresplash";
-            case ".spx": return "audio/ogg";
-            case ".src": return "application/x-wais-source";
-            case ".ssm": return "application/streamingmedia";
-            case ".sst": return "application/vnd.ms-pki.certstore";
-            case ".stl": return "application/vnd.ms-pki.stl";
-            case ".sv4cpio": return "application/x-sv4cpio";
-            case ".sv4crc": return "application/x-sv4crc";
-            case ".svg": return "image/svg+xml";
-            case ".svgz": return "image/svg+xml";
-            case ".swf": return "application/x-shockwave-flash";
-            case ".t": return "application/x-troff";
-            case ".tar": return "application/x-tar";
-            case ".tcl": return "application/x-tcl";
-            case ".tex": return "application/x-tex";
-            case ".texi": return "application/x-texinfo";
-            case ".texinfo": return "application/x-texinfo";
-            case ".tgz": return "application/x-compressed";
-            case ".thmx": return "application/vnd.ms-officetheme";
-            case ".thn": return "application/octet-stream";
-            case ".tif": return "image/tiff";
-            case ".tiff": return "image/tiff";
-            case ".toc": return "application/octet-stream";
-            case ".tr": return "application/x-troff";
-            case ".trm": return "application/x-msterminal";
-            case ".ts": return "video/vnd.dlna.mpeg-tts";
-            case ".tsv": return "text/tab-separated-values";
-            case ".ttc": return "application/x-font-ttf";
-            case ".ttf": return "application/x-font-ttf";
-            case ".tts": return "video/vnd.dlna.mpeg-tts";
-            case ".txt": return "text/plain";
-            case ".u32": return "application/octet-stream";
-            case ".uls": return "text/iuls";
-            case ".ustar": return "application/x-ustar";
-            case ".vbs": return "text/vbscript";
-            case ".vcf": return "text/x-vcard";
-            case ".vcs": return "text/plain";
-            case ".vdx": return "application/vnd.ms-visio.viewer";
-            case ".vml": return "text/xml";
-            case ".vsd": return "application/vnd.visio";
-            case ".vss": return "application/vnd.visio";
-            case ".vst": return "application/vnd.visio";
-            case ".vsto": return "application/x-ms-vsto";
-            case ".vsw": return "application/vnd.visio";
-            case ".vsx": return "application/vnd.visio";
-            case ".vtx": return "application/vnd.visio";
-            case ".wasm": return "application/wasm";
-            case ".wav": return "audio/wav";
-            case ".wax": return "audio/x-ms-wax";
-            case ".wbmp": return "image/vnd.wap.wbmp";
-            case ".wcm": return "application/vnd.ms-works";
-            case ".wdb": return "application/vnd.ms-works";
-            case ".webm": return "video/webm";
-            case ".webp": return "image/webp";
-            case ".wks": return "application/vnd.ms-works";
-            case ".wm": return "video/x-ms-wm";
-            case ".wma": return "audio/x-ms-wma";
-            case ".wmd": return "application/x-ms-wmd";
-            case ".wmf": return "application/x-msmetafile";
-            case ".wml": return "text/vnd.wap.wml";
-            case ".wmlc": return "application/vnd.wap.wmlc";
-            case ".wmls": return "text/vnd.wap.wmlscript";
-            case ".wmlsc": return "application/vnd.wap.wmlscriptc";
-            case ".wmp": return "video/x-ms-wmp";
-            case ".wmv": return "video/x-ms-wmv";
-            case ".wmx": return "video/x-ms-wmx";
-            case ".wmz": return "application/x-ms-wmz";
-            case ".woff": return "application/font-woff";
-            case ".woff2": return "font/woff2";
-            case ".wps": return "application/vnd.ms-works";
-            case ".wri": return "application/x-mswrite";
-            case ".wrl": return "x-world/x-vrml";
-            case ".wrz": return "x-world/x-vrml";
-            case ".wsdl": return "text/xml";
-            case ".wtv": return "video/x-ms-wtv";
-            case ".wvx": return "video/x-ms-wvx";
-            case ".x": return "application/directx";
-            case ".xaf": return "x-world/x-vrml";
-            case ".xaml": return "application/xaml+xml";
-            case ".xap": return "application/x-silverlight-app";
-            case ".xbap": return "application/x-ms-xbap";
-            case ".xbm": return "image/x-xbitmap";
-            case ".xdr": return "text/plain";
-            case ".xht": return "application/xhtml+xml";
-            case ".xhtml": return "application/xhtml+xml";
-            case ".xla": return "application/vnd.ms-excel";
-            case ".xlam": return "application/vnd.ms-excel.addin.macroEnabled.12";
-            case ".xlc": return "application/vnd.ms-excel";
-            case ".xlm": return "application/vnd.ms-excel";
-            case ".xls": return "application/vnd.ms-excel";
-            case ".xlsb": return "application/vnd.ms-excel.sheet.binary.macroEnabled.12";
-            case ".xlsm": return "application/vnd.ms-excel.sheet.macroEnabled.12";
-            case ".xlsx": return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            case ".xlt": return "application/vnd.ms-excel";
-            case ".xltm": return "application/vnd.ms-excel.template.macroEnabled.12";
-            case ".xltx": return "application/vnd.openxmlformats-officedocument.spreadsheetml.template";
-            case ".xlw": return "application/vnd.ms-excel";
-            case ".xml": return "text/xml";
-            case ".xof": return "x-world/x-vrml";
-            case ".xpm": return "image/x-xpixmap";
-            case ".xps": return "application/vnd.ms-xpsdocument";
-            case ".xsd": return "text/xml";
-            case ".xsf": return "text/xml";
-            case ".xsl": return "text/xml";
-            case ".xslt": return "text/xml";
-            case ".xsn": return "application/octet-stream";
-            case ".xtp": return "application/octet-stream";
-            case ".xwd": return "image/x-xwindowdump";
-            case ".z": return "application/x-compress";
-            case ".zip": return "application/x-zip-compressed";
-            default:
-                return null;
-        }
+            ".323" => "text/h323",
+            ".3g2" => "video/3gpp2",
+            ".3gp2" => "video/3gpp2",
+            ".3gp" => "video/3gpp",
+            ".3gpp" => "video/3gpp",
+            ".aac" => "audio/aac",
+            ".aaf" => "application/octet-stream",
+            ".aca" => "application/octet-stream",
+            ".accdb" => "application/msaccess",
+            ".accde" => "application/msaccess",
+            ".accdt" => "application/msaccess",
+            ".acx" => "application/internet-property-stream",
+            ".adt" => "audio/vnd.dlna.adts",
+            ".adts" => "audio/vnd.dlna.adts",
+            ".afm" => "application/octet-stream",
+            ".ai" => "application/postscript",
+            ".aif" => "audio/x-aiff",
+            ".aifc" => "audio/aiff",
+            ".aiff" => "audio/aiff",
+            ".appcache" => "text/cache-manifest",
+            ".application" => "application/x-ms-application",
+            ".art" => "image/x-jg",
+            ".asd" => "application/octet-stream",
+            ".asf" => "video/x-ms-asf",
+            ".asi" => "application/octet-stream",
+            ".asm" => "text/plain",
+            ".asr" => "video/x-ms-asf",
+            ".asx" => "video/x-ms-asf",
+            ".atom" => "application/atom+xml",
+            ".au" => "audio/basic",
+            ".avi" => "video/x-msvideo",
+            ".axs" => "application/olescript",
+            ".bas" => "text/plain",
+            ".bcpio" => "application/x-bcpio",
+            ".bin" => "application/octet-stream",
+            ".bmp" => "image/bmp",
+            ".c" => "text/plain",
+            ".cab" => "application/vnd.ms-cab-compressed",
+            ".calx" => "application/vnd.ms-office.calx",
+            ".cat" => "application/vnd.ms-pki.seccat",
+            ".cdf" => "application/x-cdf",
+            ".chm" => "application/octet-stream",
+            ".class" => "application/x-java-applet",
+            ".clp" => "application/x-msclip",
+            ".cmx" => "image/x-cmx",
+            ".cnf" => "text/plain",
+            ".cod" => "image/cis-cod",
+            ".cpio" => "application/x-cpio",
+            ".cpp" => "text/plain",
+            ".crd" => "application/x-mscardfile",
+            ".crl" => "application/pkix-crl",
+            ".crt" => "application/x-x509-ca-cert",
+            ".csh" => "application/x-csh",
+            ".css" => "text/css",
+            ".csv" => "application/octet-stream",
+            ".cur" => "application/octet-stream",
+            ".dcr" => "application/x-director",
+            ".deploy" => "application/octet-stream",
+            ".der" => "application/x-x509-ca-cert",
+            ".dib" => "image/bmp",
+            ".dir" => "application/x-director",
+            ".disco" => "text/xml",
+            ".dlm" => "text/dlm",
+            ".doc" => "application/msword",
+            ".docm" => "application/vnd.ms-word.document.macroEnabled.12",
+            ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            ".dot" => "application/msword",
+            ".dotm" => "application/vnd.ms-word.template.macroEnabled.12",
+            ".dotx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
+            ".dsp" => "application/octet-stream",
+            ".dtd" => "text/xml",
+            ".dvi" => "application/x-dvi",
+            ".dvr-ms" => "video/x-ms-dvr",
+            ".dwf" => "drawing/x-dwf",
+            ".dwp" => "application/octet-stream",
+            ".dxr" => "application/x-director",
+            ".eml" => "message/rfc822",
+            ".emz" => "application/octet-stream",
+            ".eot" => "application/vnd.ms-fontobject",
+            ".eps" => "application/postscript",
+            ".etx" => "text/x-setext",
+            ".evy" => "application/envoy",
+            ".fdf" => "application/vnd.fdf",
+            ".fif" => "application/fractals",
+            ".fla" => "application/octet-stream",
+            ".flr" => "x-world/x-vrml",
+            ".flv" => "video/x-flv",
+            ".gif" => "image/gif",
+            ".gtar" => "application/x-gtar",
+            ".gz" => "application/x-gzip",
+            ".h" => "text/plain",
+            ".hdf" => "application/x-hdf",
+            ".hdml" => "text/x-hdml",
+            ".hhc" => "application/x-oleobject",
+            ".hhk" => "application/octet-stream",
+            ".hhp" => "application/octet-stream",
+            ".hlp" => "application/winhlp",
+            ".hqx" => "application/mac-binhex40",
+            ".hta" => "application/hta",
+            ".htc" => "text/x-component",
+            ".htm" => "text/html",
+            ".html" => "text/html",
+            ".htt" => "text/webviewhtml",
+            ".hxt" => "text/html",
+            ".ical" => "text/calendar",
+            ".icalendar" => "text/calendar",
+            ".ico" => "image/x-icon",
+            ".icns" => "image/icns",
+            ".ics" => "text/calendar",
+            ".ief" => "image/ief",
+            ".ifb" => "text/calendar",
+            ".iii" => "application/x-iphone",
+            ".inf" => "application/octet-stream",
+            ".ins" => "application/x-internet-signup",
+            ".isp" => "application/x-internet-signup",
+            ".IVF" => "video/x-ivf",
+            ".jar" => "application/java-archive",
+            ".java" => "application/octet-stream",
+            ".jck" => "application/liquidmotion",
+            ".jcz" => "application/liquidmotion",
+            ".jfif" => "image/pjpeg",
+            ".jpb" => "application/octet-stream",
+            ".jpe" => "image/jpeg",
+            ".jpeg" => "image/jpeg",
+            ".jpg" => "image/jpeg",
+            ".js" => "application/javascript",
+            ".json" => "application/json",
+            ".jsx" => "text/jscript",
+            ".latex" => "application/x-latex",
+            ".lit" => "application/x-ms-reader",
+            ".lpk" => "application/octet-stream",
+            ".lsf" => "video/x-la-asf",
+            ".lsx" => "video/x-la-asf",
+            ".lzh" => "application/octet-stream",
+            ".m13" => "application/x-msmediaview",
+            ".m14" => "application/x-msmediaview",
+            ".m1v" => "video/mpeg",
+            ".m2ts" => "video/vnd.dlna.mpeg-tts",
+            ".m3u" => "audio/x-mpegurl",
+            ".m4a" => "audio/mp4",
+            ".m4v" => "video/mp4",
+            ".man" => "application/x-troff-man",
+            ".manifest" => "application/x-ms-manifest",
+            ".map" => "text/plain",
+            ".markdown" => "text/markdown",
+            ".md" => "text/markdown",
+            ".mdb" => "application/x-msaccess",
+            ".mdp" => "application/octet-stream",
+            ".me" => "application/x-troff-me",
+            ".mht" => "message/rfc822",
+            ".mhtml" => "message/rfc822",
+            ".mid" => "audio/mid",
+            ".midi" => "audio/mid",
+            ".mix" => "application/octet-stream",
+            ".mkv" => "video/x-mastroska",
+            ".mmf" => "application/x-smaf",
+            ".mno" => "text/xml",
+            ".mny" => "application/x-msmoney",
+            ".mov" => "video/quicktime",
+            ".movie" => "video/x-sgi-movie",
+            ".mp2" => "video/mpeg",
+            ".mp3" => "audio/mpeg",
+            ".mp4" => "video/mp4",
+            ".mp4v" => "video/mp4",
+            ".mpa" => "video/mpeg",
+            ".mpe" => "video/mpeg",
+            ".mpeg" => "video/mpeg",
+            ".mpg" => "video/mpeg",
+            ".mpp" => "application/vnd.ms-project",
+            ".mpv2" => "video/mpeg",
+            ".ms" => "application/x-troff-ms",
+            ".msi" => "application/octet-stream",
+            ".mso" => "application/octet-stream",
+            ".mvb" => "application/x-msmediaview",
+            ".mvc" => "application/x-miva-compiled",
+            ".nc" => "application/x-netcdf",
+            ".nsc" => "video/x-ms-asf",
+            ".nws" => "message/rfc822",
+            ".ocx" => "application/octet-stream",
+            ".oda" => "application/oda",
+            ".odc" => "text/x-ms-odc",
+            ".ods" => "application/oleobject",
+            ".oga" => "audio/ogg",
+            ".ogg" => "video/ogg",
+            ".ogv" => "video/ogg",
+            ".ogx" => "application/ogg",
+            ".one" => "application/onenote",
+            ".onea" => "application/onenote",
+            ".onetoc" => "application/onenote",
+            ".onetoc2" => "application/onenote",
+            ".onetmp" => "application/onenote",
+            ".onepkg" => "application/onenote",
+            ".osdx" => "application/opensearchdescription+xml",
+            ".otf" => "font/otf",
+            ".p10" => "application/pkcs10",
+            ".p12" => "application/x-pkcs12",
+            ".p7b" => "application/x-pkcs7-certificates",
+            ".p7c" => "application/pkcs7-mime",
+            ".p7m" => "application/pkcs7-mime",
+            ".p7r" => "application/x-pkcs7-certreqresp",
+            ".p7s" => "application/pkcs7-signature",
+            ".pbm" => "image/x-portable-bitmap",
+            ".pcx" => "application/octet-stream",
+            ".pcz" => "application/octet-stream",
+            ".pdf" => "application/pdf",
+            ".pfb" => "application/octet-stream",
+            ".pfm" => "application/octet-stream",
+            ".pfx" => "application/x-pkcs12",
+            ".pgm" => "image/x-portable-graymap",
+            ".pko" => "application/vnd.ms-pki.pko",
+            ".pma" => "application/x-perfmon",
+            ".pmc" => "application/x-perfmon",
+            ".pml" => "application/x-perfmon",
+            ".pmr" => "application/x-perfmon",
+            ".pmw" => "application/x-perfmon",
+            ".png" => "image/png",
+            ".pnm" => "image/x-portable-anymap",
+            ".pnz" => "image/png",
+            ".pot" => "application/vnd.ms-powerpoint",
+            ".potm" => "application/vnd.ms-powerpoint.template.macroEnabled.12",
+            ".potx" => "application/vnd.openxmlformats-officedocument.presentationml.template",
+            ".ppam" => "application/vnd.ms-powerpoint.addin.macroEnabled.12",
+            ".ppm" => "image/x-portable-pixmap",
+            ".pps" => "application/vnd.ms-powerpoint",
+            ".ppsm" => "application/vnd.ms-powerpoint.slideshow.macroEnabled.12",
+            ".ppsx" => "application/vnd.openxmlformats-officedocument.presentationml.slideshow",
+            ".ppt" => "application/vnd.ms-powerpoint",
+            ".pptm" => "application/vnd.ms-powerpoint.presentation.macroEnabled.12",
+            ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            ".prf" => "application/pics-rules",
+            ".prm" => "application/octet-stream",
+            ".prx" => "application/octet-stream",
+            ".ps" => "application/postscript",
+            ".psd" => "application/octet-stream",
+            ".psm" => "application/octet-stream",
+            ".psp" => "application/octet-stream",
+            ".pub" => "application/x-mspublisher",
+            ".qt" => "video/quicktime",
+            ".qtl" => "application/x-quicktimeplayer",
+            ".qxd" => "application/octet-stream",
+            ".ra" => "audio/x-pn-realaudio",
+            ".ram" => "audio/x-pn-realaudio",
+            ".rar" => "application/x-rar-compressed",
+            ".ras" => "image/x-cmu-raster",
+            ".rf" => "image/vnd.rn-realflash",
+            ".rgb" => "image/x-rgb",
+            ".rm" => "application/vnd.rn-realmedia",
+            ".rmi" => "audio/mid",
+            ".roff" => "application/x-troff",
+            ".rpm" => "audio/x-pn-realaudio-plugin",
+            ".rtf" => "application/rtf",
+            ".rtx" => "text/richtext",
+            ".scd" => "application/x-msschedule",
+            ".sct" => "text/scriptlet",
+            ".sea" => "application/octet-stream",
+            ".setpay" => "application/set-payment-initiation",
+            ".setreg" => "application/set-registration-initiation",
+            ".sgml" => "text/sgml",
+            ".sh" => "application/x-sh",
+            ".shar" => "application/x-shar",
+            ".sit" => "application/x-stuffit",
+            ".sldm" => "application/vnd.ms-powerpoint.slide.macroEnabled.12",
+            ".sldx" => "application/vnd.openxmlformats-officedocument.presentationml.slide",
+            ".smd" => "audio/x-smd",
+            ".smi" => "application/octet-stream",
+            ".smx" => "audio/x-smd",
+            ".smz" => "audio/x-smd",
+            ".snd" => "audio/basic",
+            ".snp" => "application/octet-stream",
+            ".spc" => "application/x-pkcs7-certificates",
+            ".spl" => "application/futuresplash",
+            ".spx" => "audio/ogg",
+            ".src" => "application/x-wais-source",
+            ".ssm" => "application/streamingmedia",
+            ".sst" => "application/vnd.ms-pki.certstore",
+            ".stl" => "application/vnd.ms-pki.stl",
+            ".sv4cpio" => "application/x-sv4cpio",
+            ".sv4crc" => "application/x-sv4crc",
+            ".svg" => "image/svg+xml",
+            ".svgz" => "image/svg+xml",
+            ".swf" => "application/x-shockwave-flash",
+            ".t" => "application/x-troff",
+            ".tar" => "application/x-tar",
+            ".tcl" => "application/x-tcl",
+            ".tex" => "application/x-tex",
+            ".texi" => "application/x-texinfo",
+            ".texinfo" => "application/x-texinfo",
+            ".tgz" => "application/x-compressed",
+            ".thmx" => "application/vnd.ms-officetheme",
+            ".thn" => "application/octet-stream",
+            ".tif" => "image/tiff",
+            ".tiff" => "image/tiff",
+            ".toc" => "application/octet-stream",
+            ".tr" => "application/x-troff",
+            ".trm" => "application/x-msterminal",
+            ".ts" => "video/vnd.dlna.mpeg-tts",
+            ".tsv" => "text/tab-separated-values",
+            ".ttc" => "application/x-font-ttf",
+            ".ttf" => "application/x-font-ttf",
+            ".tts" => "video/vnd.dlna.mpeg-tts",
+            ".txt" => "text/plain",
+            ".u32" => "application/octet-stream",
+            ".uls" => "text/iuls",
+            ".ustar" => "application/x-ustar",
+            ".vbs" => "text/vbscript",
+            ".vcf" => "text/x-vcard",
+            ".vcs" => "text/plain",
+            ".vdx" => "application/vnd.ms-visio.viewer",
+            ".vml" => "text/xml",
+            ".vsd" => "application/vnd.visio",
+            ".vss" => "application/vnd.visio",
+            ".vst" => "application/vnd.visio",
+            ".vsto" => "application/x-ms-vsto",
+            ".vsw" => "application/vnd.visio",
+            ".vsx" => "application/vnd.visio",
+            ".vtx" => "application/vnd.visio",
+            ".wasm" => "application/wasm",
+            ".wav" => "audio/wav",
+            ".wax" => "audio/x-ms-wax",
+            ".wbmp" => "image/vnd.wap.wbmp",
+            ".wcm" => "application/vnd.ms-works",
+            ".wdb" => "application/vnd.ms-works",
+            ".webm" => "video/webm",
+            ".webp" => "image/webp",
+            ".wks" => "application/vnd.ms-works",
+            ".wm" => "video/x-ms-wm",
+            ".wma" => "audio/x-ms-wma",
+            ".wmd" => "application/x-ms-wmd",
+            ".wmf" => "application/x-msmetafile",
+            ".wml" => "text/vnd.wap.wml",
+            ".wmlc" => "application/vnd.wap.wmlc",
+            ".wmls" => "text/vnd.wap.wmlscript",
+            ".wmlsc" => "application/vnd.wap.wmlscriptc",
+            ".wmp" => "video/x-ms-wmp",
+            ".wmv" => "video/x-ms-wmv",
+            ".wmx" => "video/x-ms-wmx",
+            ".wmz" => "application/x-ms-wmz",
+            ".woff" => "application/font-woff",
+            ".woff2" => "font/woff2",
+            ".wps" => "application/vnd.ms-works",
+            ".wri" => "application/x-mswrite",
+            ".wrl" => "x-world/x-vrml",
+            ".wrz" => "x-world/x-vrml",
+            ".wsdl" => "text/xml",
+            ".wtv" => "video/x-ms-wtv",
+            ".wvx" => "video/x-ms-wvx",
+            ".x" => "application/directx",
+            ".xaf" => "x-world/x-vrml",
+            ".xaml" => "application/xaml+xml",
+            ".xap" => "application/x-silverlight-app",
+            ".xbap" => "application/x-ms-xbap",
+            ".xbm" => "image/x-xbitmap",
+            ".xdr" => "text/plain",
+            ".xht" => "application/xhtml+xml",
+            ".xhtml" => "application/xhtml+xml",
+            ".xla" => "application/vnd.ms-excel",
+            ".xlam" => "application/vnd.ms-excel.addin.macroEnabled.12",
+            ".xlc" => "application/vnd.ms-excel",
+            ".xlm" => "application/vnd.ms-excel",
+            ".xls" => "application/vnd.ms-excel",
+            ".xlsb" => "application/vnd.ms-excel.sheet.binary.macroEnabled.12",
+            ".xlsm" => "application/vnd.ms-excel.sheet.macroEnabled.12",
+            ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ".xlt" => "application/vnd.ms-excel",
+            ".xltm" => "application/vnd.ms-excel.template.macroEnabled.12",
+            ".xltx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
+            ".xlw" => "application/vnd.ms-excel",
+            ".xml" => "text/xml",
+            ".xof" => "x-world/x-vrml",
+            ".xpm" => "image/x-xpixmap",
+            ".xps" => "application/vnd.ms-xpsdocument",
+            ".xsd" => "text/xml",
+            ".xsf" => "text/xml",
+            ".xsl" => "text/xml",
+            ".xslt" => "text/xml",
+            ".xsn" => "application/octet-stream",
+            ".xtp" => "application/octet-stream",
+            ".xwd" => "image/x-xwindowdump",
+            ".z" => "application/x-compress",
+            ".zip" => "application/x-zip-compressed",
+            _ => null,
+        };
         #endregion
     }
 
@@ -409,10 +408,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="name">File name</param>
     /// <returns>return ContentType</returns>
-    public static string? GetContentType(string name)
-    {
-        return FileContnetType(name.Split(".").LastOrDefault());
-    }
+    public static string? GetContentType(string name) => FileContnetType(name[name.LastIndexOf('.')..]);
 
 
     /// <summary>
@@ -420,12 +416,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="fileName">FileName</param>
     /// <returns>bool</returns>
-    public static bool TryContentType(string fileName)
-    {
-        if (FileContnetType(fileName.Split(".").LastOrDefault()) == null)
-        { return false; }
-        return true;
-    }
+    public static bool TryContentType(string fileName) => FileContnetType(fileName[fileName.LastIndexOf('.')..]) != null;
 
     /// <summary>
     /// Check ContentType Exist or Not, and set contentType
@@ -435,14 +426,8 @@ public static class FileContentType
     /// <returns></returns>
     public static bool TryContentType(string fileName, out string? contentType)
     {
-        string? contentTypeString = FileContnetType(fileName.Split(".").LastOrDefault());
-        if (contentTypeString == null)
-        {
-            contentType = null;
-            return false;
-        }
-        contentType = contentTypeString;
-        return true;
+        contentType = FileContnetType(fileName[fileName.LastIndexOf('.')..]);
+        return contentType != null;
     }
 }
 
