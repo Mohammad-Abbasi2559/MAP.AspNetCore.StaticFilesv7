@@ -408,7 +408,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="name">File name</param>
     /// <returns>return ContentType</returns>
-    public static string? GetContentType(string name) => FileContnetType(name[name.LastIndexOf('.')..]);
+    public static string? GetContentType(string name) => name.Contains('.') ? FileContnetType(name[name.LastIndexOf('.')..]) : null;
 
 
     /// <summary>
@@ -416,7 +416,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="fileName">FileName</param>
     /// <returns>bool</returns>
-    public static bool TryContentType(string fileName) => FileContnetType(fileName[fileName.LastIndexOf('.')..]) != null;
+    public static bool TryContentType(string fileName) => fileName.Contains('.') && FileContnetType(fileName[fileName.LastIndexOf('.')..]) != null;
 
     /// <summary>
     /// Check ContentType Exist or Not, and set contentType
@@ -426,7 +426,7 @@ public static class FileContentType
     /// <returns></returns>
     public static bool TryContentType(string fileName, out string? contentType)
     {
-        contentType = FileContnetType(fileName[fileName.LastIndexOf('.')..]);
+        contentType = fileName.Contains('.') ? FileContnetType(fileName[fileName.LastIndexOf('.')..]) : null;
         return contentType != null;
     }
 }
