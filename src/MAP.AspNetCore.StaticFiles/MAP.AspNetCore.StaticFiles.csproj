@@ -6,9 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>7.0.0-alpha</Version>
+    <Version>7.0.0-alpha2</Version>
     <Authors>Mohammad-Abbasi</Authors>
-    <Copyright>Copyright 2023-$([System.DateTime]::Now.Year) Mohammad Abbasi</Copyright>
+    <Copyright>Copyright 2022-$([System.DateTime]::Now.Year) Mohammad Abbasi</Copyright>
     <title>Work with static files and check url and path in dotnet</title>
     <Description>
       This package check Mime type of files and file extesion. 
@@ -19,7 +19,7 @@
     <PackageId>MAP.AspNetCore.StaticFiles</PackageId>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <PackageTags>Static-Files;Url;Path;Check-Path;</PackageTags>
+    <PackageTags>Static-Files;Url;Path;Check-Path;Asp.Net-Core</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Mohammad-Abbasi2559/MAP.AspNetCore.StaticFilesv7</RepositoryUrl>
   </PropertyGroup>
