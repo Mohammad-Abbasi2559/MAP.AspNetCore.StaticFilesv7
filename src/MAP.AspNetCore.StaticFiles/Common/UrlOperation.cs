@@ -46,9 +46,8 @@ public static class UrlOperation
     /// </summary>
     /// <param name="url1"></param>
     /// <param name="url2"></param>
+    /// <param name="controllerName">If your link may be have Parameter seperator with Slash you must add This variable</param>
     /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="ArgumentException"></exception>
     public static bool CheckUrlWithOutParameter(string url1, string url2, string? controllerName = null)
     {
         if (string.IsNullOrWhiteSpace(url1) || string.IsNullOrWhiteSpace(url2)) throw new ArgumentNullException("url1 or url2", "{0} is empty");
@@ -128,9 +127,8 @@ public static class UrlOperation
     /// </summary>
     /// <param name="path1"></param>
     /// <param name="path2"></param>
+    /// <param name="controllerName">If your link may be have Parameter seperator with Slash you must add This variable</param>
     /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="ArgumentException"></exception>
     public static bool CheckPathWithOutParameter(string path1, string path2, string? controllerName = null)
     {
         if (string.IsNullOrWhiteSpace(path1) || string.IsNullOrWhiteSpace(path2)) throw new ArgumentNullException("path1 or path2", "url is empty");
