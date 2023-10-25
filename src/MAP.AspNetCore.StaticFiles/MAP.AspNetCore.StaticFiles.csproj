@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>7.0.0-alpha2</Version>
+    <Version>7.0.0-alpha4</Version>
     <Authors>Mohammad-Abbasi</Authors>
     <Copyright>Copyright 2022-$([System.DateTime]::Now.Year) Mohammad Abbasi</Copyright>
     <title>Work with static files and check url and path in dotnet</title>
