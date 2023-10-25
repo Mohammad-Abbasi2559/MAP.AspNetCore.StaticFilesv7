@@ -38,7 +38,6 @@ public class UrlOperationTest
     [InlineData("admin/home/Index/", "/home/index")]
     [InlineData("admin/", "/home/index")]
     [InlineData("/admin/home/create", "/admin/home/")]
-    [InlineData("/admin/Product/create", "/admin/Product/index/")]
     public void CheckPathWithOutParameterTest2(string path1, string path2)
     {
         Assert.False(UrlOperation.CheckPathWithOutParameter(path1, path2));
@@ -49,6 +48,15 @@ public class UrlOperationTest
     public void CheckPathWithOutParameterTest3(string path1, string path2)
     {
         Assert.Throws<ArgumentNullException>(() => UrlOperation.CheckPathWithOutParameter(path1, path2));
+    }
+
+    [Theory]
+    [InlineData("/admin/home/create", "/admin/home/", "home")]
+    [InlineData("/admin/Product/create", "/admin/Product/index/", "product")]
+    [InlineData("/Admin/RolesManager/", "/Admin/RolesManager/Edit/vfvfvdsdf", "RolesManager")]
+    public void CheckPathWithOutParameterTest4(string path1, string path2, string controller)
+    {
+        Assert.False(UrlOperation.CheckPathWithOutParameter(path1, path2, controller));
     }
 
 }
