@@ -4,11 +4,11 @@ namespace MAP.AspNetCore.StaticFiles;
 public static class FileContentType
 {
     /// <summary>
-    /// This method take file extention and get contentType
+    /// This method take file extension and get contentType
     /// </summary>
     /// <param name="Extension">File extension</param>
     /// <returns>ContentType</returns>
-    internal static string? FileContnetType(string? Extension)
+    internal static string? FileContentTypes(string? Extension)
     {
         if (string.IsNullOrWhiteSpace(Extension)) throw new ArgumentNullException(nameof(Extension));
 
@@ -408,7 +408,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="name">File name</param>
     /// <returns>return ContentType</returns>
-    public static string? GetContentType(string name) => name.Contains('.') ? FileContnetType(name[name.LastIndexOf('.')..]) : null;
+    public static string? GetContentType(string name) => name.Contains('.') ? FileContentTypes(name[name.LastIndexOf('.')..]) : null;
 
 
     /// <summary>
@@ -416,7 +416,7 @@ public static class FileContentType
     /// </summary>
     /// <param name="fileName">FileName</param>
     /// <returns>bool</returns>
-    public static bool TryContentType(string fileName) => fileName.Contains('.') && FileContnetType(fileName[fileName.LastIndexOf('.')..]) != null;
+    public static bool TryContentType(string fileName) => fileName.Contains('.') && FileContentTypes(fileName[fileName.LastIndexOf('.')..]) != null;
 
     /// <summary>
     /// Check ContentType Exist or Not, and set contentType
@@ -426,7 +426,7 @@ public static class FileContentType
     /// <returns></returns>
     public static bool TryContentType(string fileName, out string? contentType)
     {
-        contentType = fileName.Contains('.') ? FileContnetType(fileName[fileName.LastIndexOf('.')..]) : null;
+        contentType = fileName.Contains('.') ? FileContentTypes(fileName[fileName.LastIndexOf('.')..]) : null;
         return contentType != null;
     }
 }
